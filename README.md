@@ -18,7 +18,3 @@
 - [ProBuilder](https://unity.com/features/probuilder)
 - [ProGrids](https://docs.unity3d.com/Packages/com.unity.progrids@3.0/manual/index.html)
 - [Cinemachine](https://unity.com/unity/features/editor/art-and-design/cinemachine)
-
-## Note
-
-- [Notion - 3D RPG](https://jck.notion.site/3D-RPG-Course-2496848786bc4ab2b85a12217739dfdd?pvs=4)
