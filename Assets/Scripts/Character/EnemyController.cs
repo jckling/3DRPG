@@ -11,19 +11,20 @@ public enum EnemyStates
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour
+[RequireComponent(typeof(CharacterStats))]
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
+    protected CharacterStats characterStats;
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
     private Animator anim;
-    private CharacterStats characterStats;
     private Collider collider;
 
     [Header("Basic Settings")] public float sightRadius;
     public bool isGuard;
-    private float speed;
-    private GameObject attackTarget;
     public float lookAtTime;
+    protected GameObject attackTarget;
+    private float speed;
     private float remainLookAtTime;
     private float lastAttackTime;
 
@@ -37,6 +38,7 @@ public class EnemyController : MonoBehaviour
     private bool isChase;
     private bool isFollow;
     private bool isDead;
+    private bool playerDead;
 
     private void Awake()
     {
@@ -61,14 +63,30 @@ public class EnemyController : MonoBehaviour
             enemyStates = EnemyStates.PATROL;
             GetNewWayPoint();
         }
+
+        GameManager.Instance.AddObserver(this);
+    }
+
+    // private void OnEnable()
+    // {
+    //     GameManager.Instance.AddObserver(this);
+    // }
+
+    private void OnDisable()
+    {
+        if (!GameManager.isInitialized) return;
+        GameManager.Instance.RemoveObserver(this);
     }
 
     private void Update()
     {
         isDead = characterStats.CurrentHealth == 0;
-        SwitchState();
-        SwitchAnimation();
-        lastAttackTime -= Time.deltaTime;
+        if (!playerDead)
+        {
+            SwitchState();
+            SwitchAnimation();
+            lastAttackTime -= Time.deltaTime;
+        }
     }
 
     private void SwitchAnimation()
@@ -206,7 +224,7 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         collider.enabled = false;
-        agent.enabled = false;
+        agent.radius = 0;
         Destroy(gameObject, 2f);
     }
 
@@ -258,8 +276,19 @@ public class EnemyController : MonoBehaviour
     // Animation Event
     void Hit()
     {
-        if (attackTarget == null) return;
+        if (attackTarget == null || !transform.IsFacingTarget(attackTarget.transform)) return;
         var targetStats = attackTarget.GetComponent<CharacterStats>();
         targetStats.TakeDamage(characterStats, targetStats);
+    }
+
+    public void EndNotify()
+    {
+        playerDead = true;
+        anim.SetBool("Win", true);
+
+        isWalk = false;
+        isChase = false;
+        isFollow = false;
+        attackTarget = null;
     }
 }

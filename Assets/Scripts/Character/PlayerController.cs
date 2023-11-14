@@ -8,14 +8,16 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private CharacterStats characterStats;
     private GameObject attackTarget;
-    private float lastAttackTime;
     private bool isDead;
+    private float lastAttackTime;
+    private float stopDistance;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        stopDistance = agent.stoppingDistance;
     }
 
     private void Start()
@@ -29,6 +31,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         isDead = characterStats.CurrentHealth == 0;
+
+        if (isDead)
+        {
+            GameManager.Instance.NotifyObservers();
+        }
+
         SwitchAnimation();
 
         lastAttackTime -= Time.deltaTime;
@@ -43,24 +51,28 @@ public class PlayerController : MonoBehaviour
     private void MoveToTarget(Vector3 target)
     {
         StopAllCoroutines();
+        if (isDead) return;
+
+        agent.stoppingDistance = stopDistance;
         agent.isStopped = false;
         agent.destination = target;
     }
 
     private void EventAttack(GameObject target)
     {
-        if (target != null)
-        {
-            attackTarget = target;
-            characterStats.isCritical = Random.value < characterStats.CriticalChance;
-            StartCoroutine(MoveToAttackTarget());
-        }
+        if (isDead || target == null) return;
+
+        attackTarget = target;
+        characterStats.isCritical = Random.value < characterStats.CriticalChance;
+        StartCoroutine(MoveToAttackTarget());
     }
 
     private IEnumerator MoveToAttackTarget()
     {
         // move
         agent.isStopped = false;
+        agent.stoppingDistance = characterStats.AttackRange;
+
         transform.LookAt(attackTarget.transform);
         while (Vector3.Distance(attackTarget.transform.position, transform.position) > characterStats.AttackRange)
         {
