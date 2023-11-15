@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 2772381064648850844}
   - component: {fileID: 2772381064648850847}
   - component: {fileID: 2772381064648850846}
+  - component: {fileID: 7295464835061178608}
   m_Layer: 7
   m_Name: Golem
   m_TagString: Enemy
@@ -747,6 +748,7 @@ Transform:
   m_Children:
   - {fileID: 2772381063660235914}
   - {fileID: 2772381065391754666}
+  - {fileID: 2192500238839982544}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 36.186, z: 0}
@@ -839,6 +841,24 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 0
   kickForce: 30
+  rockPrefab: {fileID: 0}
+  handPos: {fileID: 0}
+--- !u!114 &7295464835061178608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772381065721862877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c9a1658b9d59542ba839e19f7d79c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 2775240745293160266, guid: 54909e76b2fa1304c8343b7084f51953, type: 3}
+  healthBarPoint: {fileID: 2192500238839982544}
+  alwaysVisible: 0
+  visibleTime: 3
 --- !u!1 &2772381065747655028
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,4 +890,35 @@ Transform:
   - {fileID: 2772381063911661601}
   m_Father: {fileID: 2772381064683172987}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4379724114630270385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2192500238839982544}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2192500238839982544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379724114630270385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2772381065721862879}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

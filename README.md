@@ -15,6 +15,11 @@
 - [Mini Legion Grunt PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-grunt-pbr-hp-polyart-98187)
 - [Mini Legion Rock Golem PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-rock-golem-pbr-hp-polyart-94707)
 
+Not Free
+
+- [Modular RPG Hero Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-rpg-hero-polyart-138600)
+- [RPG Monster Wave Polyart](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-wave-polyart-157652)
+
 ## Packages
 
 - [Polybrush](https://unity.com/features/polybrush)

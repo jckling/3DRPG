@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
 {
+    public event Action<int, int> UpdateHealthBar;
     public CharacterData_SO templateData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
@@ -42,6 +44,42 @@ public class CharacterStats : MonoBehaviour
         set => characterData.currentDefence = value;
     }
 
+    public int KillPoint
+    {
+        get => characterData != null ? characterData.killPoint : 0;
+        set => characterData.currentDefence = value;
+    }
+
+    public int CurrentLevel
+    {
+        get => characterData != null ? characterData.currentLevel : 0;
+        set => characterData.currentLevel = value;
+    }
+
+    public int MaxLevel
+    {
+        get => characterData != null ? characterData.maxLevel : 0;
+        set => characterData.maxLevel = value;
+    }
+
+    public int BaseExp
+    {
+        get => characterData != null ? characterData.baseExp : 0;
+        set => characterData.baseExp = value;
+    }
+
+    public int CurrentExp
+    {
+        get => characterData != null ? characterData.currentExp : 0;
+        set => characterData.currentExp = value;
+    }
+
+    public float LevelBuff
+    {
+        get => characterData != null ? characterData.levelBuff : 0;
+        set => characterData.levelBuff = value;
+    }
+
     #endregion
 
     #region Read from AttackData_SO
@@ -66,6 +104,24 @@ public class CharacterStats : MonoBehaviour
         if (attacker.isCritical)
         {
             defender.GetComponent<Animator>().SetTrigger("Hit");
+        }
+
+        UpdateHealthBar?.Invoke(CurrentHealth, MaxHealth);
+        if (CurrentHealth <= 0)
+        {
+            attacker.characterData.UpdateExp(characterData.killPoint);
+        }
+    }
+
+    public void TakeDamage(int damage, CharacterStats defender)
+    {
+        int currentDamage = Mathf.Max(damage - defender.CurrentDamage(), 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+
+        UpdateHealthBar?.Invoke(CurrentHealth, MaxHealth);
+        if (CurrentHealth <= 0)
+        {
+            GameManager.Instance.playerStats.characterData.UpdateExp(characterData.killPoint);
         }
     }
 

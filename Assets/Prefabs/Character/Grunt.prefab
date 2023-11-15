@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 113703789669242388}
   - component: {fileID: 113703789669242379}
   - component: {fileID: 113703789669242378}
+  - component: {fileID: 8067631325107193061}
   m_Layer: 7
   m_Name: Grunt
   m_TagString: Enemy
@@ -162,6 +163,7 @@ Transform:
   m_Children:
   - {fileID: 113703791159619693}
   - {fileID: 113703791513724912}
+  - {fileID: 776525718512317758}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 8.101, z: 0}
@@ -254,6 +256,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8067631325107193061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113703790057520105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c9a1658b9d59542ba839e19f7d79c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 2775240745293160266, guid: 54909e76b2fa1304c8343b7084f51953, type: 3}
+  healthBarPoint: {fileID: 776525718512317758}
+  alwaysVisible: 0
+  visibleTime: 3
 --- !u!1 &113703790124502100
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,5 +986,36 @@ Transform:
   m_Children:
   - {fileID: 113703791394504917}
   m_Father: {fileID: 113703791513724912}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6465120621067565217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776525718512317758}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &776525718512317758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465120621067565217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 113703790057519127}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
