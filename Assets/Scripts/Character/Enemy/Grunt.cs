@@ -7,7 +7,10 @@ public class Grunt : EnemyController
 
     public void Kickoff()
     {
-        if (attackTarget == null) return;
+        if (attackTarget == null)
+        {
+            return;
+        }
 
         transform.LookAt(attackTarget.transform);
 

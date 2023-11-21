@@ -9,6 +9,6 @@ public class TransitionDestination : MonoBehaviour
         B,
         C
     }
-    
+
     public DestinationTag destinationTag;
 }

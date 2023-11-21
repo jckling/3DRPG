@@ -98,7 +98,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(CharacterStats attacker, CharacterStats defender)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDamage(), 0);
+        int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         if (attacker.isCritical)
@@ -115,7 +115,7 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage, CharacterStats defender)
     {
-        int currentDamage = Mathf.Max(damage - defender.CurrentDamage(), 0);
+        int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
 
         UpdateHealthBar?.Invoke(CurrentHealth, MaxHealth);
@@ -128,7 +128,11 @@ public class CharacterStats : MonoBehaviour
     private int CurrentDamage()
     {
         float coreDamage = Random.Range(attackData.minDamage, attackData.maxDamage);
-        if (isCritical) coreDamage *= attackData.criticalMultiplier;
+        if (isCritical)
+        {
+            coreDamage *= attackData.criticalMultiplier;
+        }
+
         return (int)coreDamage;
     }
 

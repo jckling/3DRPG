@@ -9,9 +9,12 @@ public class Golem : EnemyController
 
     public void Kickoff()
     {
-        if (attackTarget == null || !transform.IsFacingTarget(attackTarget.transform)) return;
-        var targetStats = attackTarget.GetComponent<CharacterStats>();
+        if (attackTarget == null || !transform.IsFacingTarget(attackTarget.transform))
+        {
+            return;
+        }
 
+        var targetStats = attackTarget.GetComponent<CharacterStats>();
         transform.LookAt(attackTarget.transform);
 
         var direction = (attackTarget.transform.position - transform.position).normalized;
@@ -29,7 +32,11 @@ public class Golem : EnemyController
 
     public void ThrowRock()
     {
-        if (attackTarget == null) return;
+        if (attackTarget == null)
+        {
+            return;
+        }
+
         var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
         rock.GetComponent<Rock>().target = attackTarget;
     }

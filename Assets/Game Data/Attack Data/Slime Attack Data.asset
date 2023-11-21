@@ -17,5 +17,5 @@ MonoBehaviour:
   coolDown: 1
   minDamage: 2
   maxDamage: 4
-  criticalMultiplier: 5
+  criticalMultiplier: 2
   criticalChance: 0.2

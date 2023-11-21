@@ -5,10 +5,14 @@ public class MouseManager : Singleton<MouseManager>
 {
     public event Action<Vector3> OnMouseClicked;
     public event Action<GameObject> OnEnemyClicked;
-
     public Texture2D point, doorway, attack, target, arrow;
-
     private RaycastHit hitInfo;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
 
     private void Update()
     {
@@ -32,6 +36,9 @@ public class MouseManager : Singleton<MouseManager>
                     break;
                 case "Portal":
                     Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                default:
+                    Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
                     break;
             }
         }

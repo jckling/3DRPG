@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float stopDistance;
     private readonly float hitForce = 20;
 
+    #region Event
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -23,10 +26,25 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        SaveManager.Instance.LoadPlayerData();
+    }
+
+    private void OnEnable()
+    {
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
-
         GameManager.Instance.RegisterPlayer(characterStats);
+    }
+
+    private void OnDisable()
+    {
+        if (!MouseManager.isInitialized)
+        {
+            return;
+        }
+
+        MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+        MouseManager.Instance.OnEnemyClicked -= EventAttack;
     }
 
     private void Update()
@@ -43,6 +61,8 @@ public class PlayerController : MonoBehaviour
         lastAttackTime -= Time.deltaTime;
     }
 
+    #endregion
+
     private void SwitchAnimation()
     {
         anim.SetFloat("Speed", agent.velocity.sqrMagnitude);
@@ -52,7 +72,10 @@ public class PlayerController : MonoBehaviour
     private void MoveToTarget(Vector3 target)
     {
         StopAllCoroutines();
-        if (isDead) return;
+        if (isDead)
+        {
+            return;
+        }
 
         agent.stoppingDistance = stopDistance;
         agent.isStopped = false;
@@ -61,7 +84,10 @@ public class PlayerController : MonoBehaviour
 
     private void EventAttack(GameObject target)
     {
-        if (isDead || target == null) return;
+        if (isDead || target == null)
+        {
+            return;
+        }
 
         attackTarget = target;
         characterStats.isCritical = Random.value < characterStats.CriticalChance;
@@ -75,6 +101,12 @@ public class PlayerController : MonoBehaviour
         agent.stoppingDistance = characterStats.AttackRange;
 
         transform.LookAt(attackTarget.transform);
+
+        if (attackTarget == null)
+        {
+            yield break;
+        }
+
         while (Vector3.Distance(attackTarget.transform.position, transform.position) > characterStats.AttackRange)
         {
             agent.destination = attackTarget.transform.position;

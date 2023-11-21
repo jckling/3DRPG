@@ -40,6 +40,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private bool isDead;
     private bool playerDead;
 
+    #region Events
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -74,7 +76,11 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private void OnDisable()
     {
-        if (!GameManager.isInitialized) return;
+        if (!GameManager.isInitialized)
+        {
+            return;
+        }
+
         GameManager.Instance.RemoveObserver(this);
     }
 
@@ -88,6 +94,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             lastAttackTime -= Time.deltaTime;
         }
     }
+
+    #endregion
 
     private void SwitchAnimation()
     {
@@ -106,7 +114,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
         else if (FoundPlayer())
         {
+            agent.stoppingDistance = characterStats.AttackRange;
             enemyStates = EnemyStates.CHASE;
+        }
+        else
+        {
+            agent.stoppingDistance = agent.radius;
         }
 
         switch (enemyStates)
@@ -126,10 +139,13 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
     }
 
+    #region State
+
     private void Guard()
     {
-        agent.speed = speed * 0.5f;
         isChase = false;
+        agent.speed = speed * 0.5f;
+
         if (transform.position != guardPosition)
         {
             isWalk = true;
@@ -148,6 +164,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         isChase = false;
         agent.speed = speed * 0.5f;
+
         if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
         {
             isWalk = false;
@@ -171,8 +188,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         isWalk = false;
         isChase = true;
-
         agent.speed = speed;
+
         if (!FoundPlayer())
         {
             isFollow = false;
@@ -198,6 +215,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         {
             isFollow = false;
             agent.isStopped = true;
+
             if (lastAttackTime < 0)
             {
                 lastAttackTime = characterStats.CoolDown;
@@ -210,6 +228,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private void Attack()
     {
         transform.LookAt(attackTarget.transform);
+
         if (TargetInAttackRange())
         {
             anim.SetTrigger("Attack");
@@ -227,6 +246,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         agent.radius = 0;
         Destroy(gameObject, 2f);
     }
+
+    #endregion
 
     private bool FoundPlayer()
     {
@@ -264,7 +285,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         float randomZ = Random.Range(-patrolRange, patrolRange);
         Vector3 randomPoint = new Vector3(guardPosition.x + randomX, transform.position.y, guardPosition.z + randomZ);
 
-        wayPoint = NavMesh.SamplePosition(randomPoint, out var hit, patrolRange, 1) ? randomPoint : transform.position;
+        wayPoint = NavMesh.SamplePosition(randomPoint, out var hit, patrolRange, 1) ? hit.position : transform.position;
     }
 
     private void OnDrawGizmosSelected()
@@ -276,9 +297,11 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     // Animation Event
     void Hit()
     {
-        if (attackTarget == null || !transform.IsFacingTarget(attackTarget.transform)) return;
-        var targetStats = attackTarget.GetComponent<CharacterStats>();
-        targetStats.TakeDamage(characterStats, targetStats);
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            targetStats.TakeDamage(characterStats, targetStats);
+        }
     }
 
     public void EndNotify()
