@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4832805591772292000}
   - component: {fileID: 4832805591772292001}
   - component: {fileID: 4832805591772292014}
-  - component: {fileID: 4832805591772292003}
   - component: {fileID: 810221481010618248}
+  - component: {fileID: 4832805591772292003}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Portal
@@ -86,6 +86,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &810221481010618248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832805591772292012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.3, z: 3.5}
+  m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!114 &4832805591772292003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,19 +114,6 @@ MonoBehaviour:
   sceneName: 
   transitionType: 0
   destinationTag: 0
---- !u!65 &810221481010618248
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4832805591772292012}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.3, z: 3.5}
-  m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!1 &4832805593440363212
 GameObject:
   m_ObjectHideFlags: 0

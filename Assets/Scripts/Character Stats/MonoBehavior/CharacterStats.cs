@@ -5,17 +5,24 @@ using Random = UnityEngine.Random;
 public class CharacterStats : MonoBehaviour
 {
     public event Action<int, int> UpdateHealthBar;
-    public CharacterData_SO templateData;
+
+    public CharacterData_SO templateCharacterData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
+    private AttackData_SO baseAttackData;
+
     [HideInInspector] public bool isCritical;
+
+    [Header("Weapon")] public Transform weaponSlot;
 
     private void Awake()
     {
-        if (templateData != null)
+        if (templateCharacterData != null)
         {
-            characterData = Instantiate(templateData);
+            characterData = Instantiate(templateCharacterData);
         }
+
+        baseAttackData = Instantiate(attackData);
     }
 
     #region Read from CharacterData_SO
@@ -134,6 +141,55 @@ public class CharacterStats : MonoBehaviour
         }
 
         return (int)coreDamage;
+    }
+
+    #endregion
+
+    #region Weapon
+
+    public void ChangeWeapon(ItemData_SO weapon)
+    {
+        UnEquipWeapon();
+        EquipWeapon(weapon);
+        // InventoryManager.Instance.UpdateStatsText(MaxHealth, MinDamage, MaxDamage);
+    }
+
+    public void EquipWeapon(ItemData_SO weapon)
+    {
+        if (weapon.weaponPrefab != null)
+        {
+            Instantiate(weapon.weaponPrefab, weaponSlot);
+            attackData.ApplyWeaponData(weapon.weaponData);
+        }
+    }
+
+    public void UnEquipWeapon()
+    {
+        if (weaponSlot.transform.childCount > 0)
+        {
+            for (var i = 0; i < weaponSlot.transform.childCount; i++)
+            {
+                Destroy(weaponSlot.transform.GetChild(i).gameObject);
+            }
+        }
+
+        attackData.ApplyWeaponData(baseAttackData);
+    }
+
+    #endregion
+
+    #region Usable
+
+    public void ApplyHealth(int amount)
+    {
+        if (CurrentHealth + amount <= MaxHealth)
+        {
+            CurrentHealth += amount;
+        }
+        else
+        {
+            CurrentHealth = MaxHealth;
+        }
     }
 
     #endregion

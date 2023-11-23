@@ -169,11 +169,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3942260626576022101}
   - component: {fileID: 3548555419369656519}
-  - component: {fileID: 6826183523407896905}
-  - component: {fileID: 6826183523407896907}
   - component: {fileID: 6826183523407896904}
+  - component: {fileID: 6826183523407896905}
   - component: {fileID: 7658025651121277487}
   - component: {fileID: 1433499493388452908}
+  - component: {fileID: 6826183523407896907}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4467123929233932527}
-  m_LocalRotation: {x: -0, y: -0.96942174, z: -0, w: 0.24540073}
+  m_LocalRotation: {x: 0, y: -0.9694218, z: 0, w: 0.24540052}
   m_LocalPosition: {x: 19.73, y: 0, z: 14.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -220,35 +220,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &6826183523407896905
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4467123929233932527}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &6826183523407896907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4467123929233932527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe020fd504b8b841b20295d7fdf760b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sightRadius: 8
-  isGuard: 0
-  lookAtTime: 3
-  patrolRange: 8
 --- !u!195 &6826183523407896904
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -271,6 +242,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &6826183523407896905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467123929233932527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &7658025651121277487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,10 +267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: 84cb568aaad6e4647b24a126fddf6f07, type: 2}
+  templateCharacterData: {fileID: 11400000, guid: 84cb568aaad6e4647b24a126fddf6f07, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: d580bf11259d34a4c91deb4f23cb59ff, type: 2}
   isCritical: 0
+  weaponSlot: {fileID: 0}
 --- !u!114 &1433499493388452908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +288,22 @@ MonoBehaviour:
   healthBarPoint: {fileID: 7451524475746613845}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &6826183523407896907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467123929233932527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe020fd504b8b841b20295d7fdf760b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 8
+  isGuard: 0
+  lookAtTime: 3
+  patrolRange: 8
 --- !u!1 &4575186986206959016
 GameObject:
   m_ObjectHideFlags: 0

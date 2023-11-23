@@ -722,11 +722,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2772381065721862879}
   - component: {fileID: 2772381065721862876}
-  - component: {fileID: 2772381064648850843}
   - component: {fileID: 2772381064648850844}
+  - component: {fileID: 2772381064648850843}
   - component: {fileID: 2772381064648850847}
-  - component: {fileID: 2772381064648850846}
   - component: {fileID: 7295464835061178608}
+  - component: {fileID: 2772381064648850846}
   m_Layer: 7
   m_Name: Golem
   m_TagString: Enemy
@@ -773,19 +773,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &2772381064648850843
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772381065721862877}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 4, z: 2}
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!195 &2772381064648850844
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -808,6 +795,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &2772381064648850843
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772381065721862877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 4, z: 2}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &2772381064648850847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,10 +820,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: f852686b1a3ca0e4caf2e302caf7c9db, type: 2}
+  templateCharacterData: {fileID: 11400000, guid: f852686b1a3ca0e4caf2e302caf7c9db, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: cc2c70ad6a4185f4995ff4a3628d7459, type: 2}
   isCritical: 0
+  weaponSlot: {fileID: 0}
+--- !u!114 &7295464835061178608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772381065721862877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c9a1658b9d59542ba839e19f7d79c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 2775240745293160266, guid: 54909e76b2fa1304c8343b7084f51953, type: 3}
+  healthBarPoint: {fileID: 2192500238839982544}
+  alwaysVisible: 0
+  visibleTime: 3
 --- !u!114 &2772381064648850846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,22 +860,6 @@ MonoBehaviour:
   kickForce: 30
   rockPrefab: {fileID: 4056442283233584870, guid: 165b9e19ac5111049bf169dc66bb2584, type: 3}
   handPos: {fileID: 2772381065457183161}
---- !u!114 &7295464835061178608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772381065721862877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c9a1658b9d59542ba839e19f7d79c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 2775240745293160266, guid: 54909e76b2fa1304c8343b7084f51953, type: 3}
-  healthBarPoint: {fileID: 2192500238839982544}
-  alwaysVisible: 0
-  visibleTime: 3
 --- !u!1 &2772381065747655028
 GameObject:
   m_ObjectHideFlags: 0

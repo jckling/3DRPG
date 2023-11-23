@@ -1083,11 +1083,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8958203363812574282}
   - component: {fileID: 3076454062997102128}
-  - component: {fileID: 3072463943982032597}
-  - component: {fileID: 3072463943982032584}
-  - component: {fileID: 3072463943982032599}
   - component: {fileID: 3072463943982032598}
+  - component: {fileID: 3072463943982032597}
+  - component: {fileID: 3072463943982032599}
   - component: {fileID: 2563498657528733848}
+  - component: {fileID: 3072463943982032584}
   m_Layer: 7
   m_Name: TurtleShell
   m_TagString: Enemy
@@ -1102,7 +1102,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8582241118944648944}
-  m_LocalRotation: {x: -0, y: -0.9752197, z: -0, w: 0.2212386}
+  m_LocalRotation: {x: 0, y: -0.97521895, z: 0, w: 0.22124217}
   m_LocalPosition: {x: 15.1, y: 0, z: 15.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1134,51 +1134,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &3072463943982032597
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582241118944648944}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &3072463943982032584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582241118944648944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe020fd504b8b841b20295d7fdf760b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sightRadius: 6
-  isGuard: 0
-  lookAtTime: 4
-  patrolRange: 5
---- !u!114 &3072463943982032599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582241118944648944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: 5ae241f40df8f3b4da7fad9d9e187b54, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 24b0426aadf6b9346a8283048acad87c, type: 2}
-  isCritical: 0
 --- !u!195 &3072463943982032598
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1201,6 +1156,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &3072463943982032597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582241118944648944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3072463943982032599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582241118944648944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateCharacterData: {fileID: 11400000, guid: 5ae241f40df8f3b4da7fad9d9e187b54, type: 2}
+  characterData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: 24b0426aadf6b9346a8283048acad87c, type: 2}
+  isCritical: 0
+  weaponSlot: {fileID: 0}
 --- !u!114 &2563498657528733848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,6 +1202,22 @@ MonoBehaviour:
   healthBarPoint: {fileID: 420114285991697162}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &3072463943982032584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582241118944648944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe020fd504b8b841b20295d7fdf760b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 6
+  isGuard: 0
+  lookAtTime: 4
+  patrolRange: 5
 --- !u!1 &9149813591303903614
 GameObject:
   m_ObjectHideFlags: 0

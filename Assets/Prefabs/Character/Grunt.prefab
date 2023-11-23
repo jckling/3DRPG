@@ -137,11 +137,11 @@ GameObject:
   m_Component:
   - component: {fileID: 113703790057519127}
   - component: {fileID: 113703790057520104}
-  - component: {fileID: 113703789669242389}
-  - component: {fileID: 113703789669242388}
-  - component: {fileID: 113703789669242379}
   - component: {fileID: 113703789669242378}
+  - component: {fileID: 113703789669242389}
+  - component: {fileID: 113703789669242379}
   - component: {fileID: 8067631325107193061}
+  - component: {fileID: 113703789669242388}
   m_Layer: 7
   m_Name: Grunt
   m_TagString: Enemy
@@ -188,52 +188,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &113703789669242389
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113703790057520105}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.2, z: 1.2}
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &113703789669242388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113703790057520105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f728358399a8bb4aa487bf487f89c7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sightRadius: 7
-  isGuard: 0
-  lookAtTime: 3
-  patrolRange: 8
-  kickForce: 10
---- !u!114 &113703789669242379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113703790057520105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateData: {fileID: 11400000, guid: 2aa46c8a4f10ab1468d436acc56b989b, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 43c1e32e2b6380c43ac529d9601eecf2, type: 2}
-  isCritical: 0
 --- !u!195 &113703789669242378
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -256,6 +210,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &113703789669242389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113703790057520105}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2.2, z: 1.2}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &113703789669242379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113703790057520105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728b8461bf6bb2b4a999d40db32b0430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateCharacterData: {fileID: 11400000, guid: 2aa46c8a4f10ab1468d436acc56b989b, type: 2}
+  characterData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: 43c1e32e2b6380c43ac529d9601eecf2, type: 2}
+  isCritical: 0
+  weaponSlot: {fileID: 0}
 --- !u!114 &8067631325107193061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +256,23 @@ MonoBehaviour:
   healthBarPoint: {fileID: 776525718512317758}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &113703789669242388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113703790057520105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f728358399a8bb4aa487bf487f89c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 7
+  isGuard: 0
+  lookAtTime: 3
+  patrolRange: 8
+  kickForce: 10
 --- !u!1 &113703790124502100
 GameObject:
   m_ObjectHideFlags: 0

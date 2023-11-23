@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseManager : Singleton<MouseManager>
 {
@@ -16,8 +17,15 @@ public class MouseManager : Singleton<MouseManager>
 
     private void Update()
     {
-        SetCursorTexture();
-        MouseControl();
+        if (InteractWithUI())
+        {
+            Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
+        }
+        else
+        {
+            SetCursorTexture();
+            MouseControl();
+        }
     }
 
     private void SetCursorTexture()
@@ -36,6 +44,9 @@ public class MouseManager : Singleton<MouseManager>
                     break;
                 case "Portal":
                     Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                case "Item":
+                    Cursor.SetCursor(point, new Vector2(16, 16), CursorMode.Auto);
                     break;
                 default:
                     Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
@@ -67,6 +78,16 @@ public class MouseManager : Singleton<MouseManager>
             {
                 OnMouseClicked?.Invoke(hitInfo.point);
             }
+
+            if (hitInfo.collider.gameObject.CompareTag("Item"))
+            {
+                OnMouseClicked?.Invoke(hitInfo.point);
+            }
         }
+    }
+
+    private bool InteractWithUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 }
