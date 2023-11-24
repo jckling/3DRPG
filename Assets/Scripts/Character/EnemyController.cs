@@ -33,14 +33,14 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private Vector3 guardPosition;
     private Quaternion guardRotation;
 
-    // animation
+    // Animator Parameters
     private bool isWalk;
     private bool isChase;
     private bool isFollow;
     private bool isDead;
     private bool playerDead;
 
-    #region Events
+    #region Event Functions
 
     private void Awake()
     {
@@ -82,6 +82,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
 
         GameManager.Instance.RemoveObserver(this);
+        if (GetComponent<LootSpawner>() && isDead)
+        {
+            GetComponent<LootSpawner>().SpawnLoot();
+        }
     }
 
     private void Update()
@@ -139,7 +143,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
     }
 
-    #region State
+    #region State Functions
 
     private void Guard()
     {
@@ -294,7 +298,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         Gizmos.DrawWireSphere(transform.position, sightRadius);
     }
 
-    // Animation Event
+    #region Animation Event
+
     void Hit()
     {
         if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
@@ -303,6 +308,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             targetStats.TakeDamage(characterStats, targetStats);
         }
     }
+
+    #endregion
 
     public void EndNotify()
     {

@@ -7,6 +7,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private ItemUI currentItemUI;
     private SlotHolder currentHolder;
     private SlotHolder targetHolder;
+    public bool isDragging = false;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         };
 
         transform.SetParent(InventoryManager.Instance.dragCanvas.transform, true);
+        isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -47,35 +49,38 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
                 }
 
-                switch (targetHolder.slotType)
+                if (targetHolder != InventoryManager.Instance.currentDrag.originSlotHolder)
                 {
-                    case SlotType.Bag:
-                        SwapItem();
-                        break;
-                    case SlotType.Weapon:
-                        if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
-                            ItemType.Weapon)
-                        {
+                    switch (targetHolder.slotType)
+                    {
+                        case SlotType.Bag:
                             SwapItem();
-                        }
+                            break;
+                        case SlotType.Weapon:
+                            if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
+                                ItemType.Weapon)
+                            {
+                                SwapItem();
+                            }
 
-                        break;
-                    case SlotType.Armor:
-                        if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
-                            ItemType.Armor)
-                        {
-                            SwapItem();
-                        }
+                            break;
+                        case SlotType.Armor:
+                            if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
+                                ItemType.Armor)
+                            {
+                                SwapItem();
+                            }
 
-                        break;
-                    case SlotType.Action:
-                        if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
-                            ItemType.Usable)
-                        {
-                            SwapItem();
-                        }
+                            break;
+                        case SlotType.Action:
+                            if (currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index].itemData.itemType ==
+                                ItemType.Usable)
+                            {
+                                SwapItem();
+                            }
 
-                        break;
+                            break;
+                    }
                 }
 
                 currentHolder.UpdateItem();
@@ -91,6 +96,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         RectTransform rectTransform = transform as RectTransform;
         rectTransform.offsetMax = -Vector2.one * 6;
         rectTransform.offsetMin = Vector2.one * 6;
+
+        isDragging = false;
     }
 
     private void SwapItem()

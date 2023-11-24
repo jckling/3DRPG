@@ -41,7 +41,7 @@ public class SaveManager : Singleton<SaveManager>
         Load(GameManager.Instance.playerStats.characterData, GameManager.Instance.playerStats.characterData.name);
     }
 
-    private void Save(Object data, string key)
+    public void Save(Object data, string key)
     {
         var jsonData = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString(key, jsonData);
@@ -49,7 +49,7 @@ public class SaveManager : Singleton<SaveManager>
         PlayerPrefs.Save();
     }
 
-    private void Load(Object data, string key)
+    public void Load(Object data, string key)
     {
         if (PlayerPrefs.HasKey(key))
         {

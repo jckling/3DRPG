@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float stopDistance;
     private readonly float hitForce = 20;
 
-    #region Event
+    #region Event Functions
 
     private void Awake()
     {
@@ -123,7 +123,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Animation Event
+    #region Animation Events
+
     void Hit()
     {
         if (attackTarget.CompareTag("Attackable"))
@@ -142,4 +143,6 @@ public class PlayerController : MonoBehaviour
             targetStats.TakeDamage(characterStats, targetStats);
         }
     }
+
+    #endregion
 }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : Singleton<SceneController>, IEndGameObserver
 {
     public GameObject playerPrefab;
-    public SceneFade fadeCanvasPrefab;
+    public SceneFader fadeCanvasPrefab;
     private GameObject player;
     private NavMeshAgent playerAgent;
     private bool fadeFinished;
@@ -39,6 +39,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
         SaveManager.Instance.SavePlayerData();
+        InventoryManager.Instance.SaveData();
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
@@ -91,7 +92,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
 
     IEnumerator LoadLevel(string scene)
     {
-        SceneFade fadeCanvas = Instantiate(fadeCanvasPrefab);
+        SceneFader fadeCanvas = Instantiate(fadeCanvasPrefab);
         if (!string.IsNullOrEmpty(scene))
         {
             yield return StartCoroutine(fadeCanvas.FadeOut(3f));
@@ -100,13 +101,14 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
                 GameManager.Instance.GetEntrance().rotation);
 
             SaveManager.Instance.SavePlayerData();
+            InventoryManager.Instance.SaveData();
             yield return StartCoroutine(fadeCanvas.FadeIn(2f));
         }
     }
 
     IEnumerator LoadMain()
     {
-        SceneFade fadeCanvas = Instantiate(fadeCanvasPrefab);
+        SceneFader fadeCanvas = Instantiate(fadeCanvasPrefab);
         yield return StartCoroutine(fadeCanvas.FadeOut(3f));
         yield return SceneManager.LoadSceneAsync("Main");
         yield return StartCoroutine(fadeCanvas.FadeIn(2f));

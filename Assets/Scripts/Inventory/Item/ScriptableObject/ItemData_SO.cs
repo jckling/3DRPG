@@ -18,7 +18,8 @@ public class ItemData_SO : ScriptableObject
     public bool stackable;
 
     [Header("Usable Item")] public UsableItemData_SO usableItemData;
-    
+
     [Header("Weapon")] public GameObject weaponPrefab;
     public AttackData_SO weaponData;
+    public AnimatorOverrideController weaponAnimator;
 }

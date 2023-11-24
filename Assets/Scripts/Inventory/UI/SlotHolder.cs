@@ -9,7 +9,7 @@ public enum SlotType
     Action
 }
 
-public class SlotHolder : MonoBehaviour, IPointerClickHandler
+public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public SlotType slotType;
     public ItemUI itemUI;
@@ -65,5 +65,25 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler
         }
 
         UpdateItem();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (itemUI.GetItem() && itemUI.gameObject.GetComponent<DragItem>() &&
+            !itemUI.gameObject.GetComponent<DragItem>().isDragging)
+        {
+            InventoryManager.Instance.tooltip.SetUpTooltip(itemUI.GetItem());
+            InventoryManager.Instance.tooltip.gameObject.SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
     }
 }

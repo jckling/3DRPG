@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SceneFade : MonoBehaviour
+public class SceneFader : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
     public float fadeInDuration;

@@ -15,6 +15,8 @@ public class EnemyHealthBar : MonoBehaviour
     private Transform cam;
     private CharacterStats currentStats;
 
+    #region Event Functions
+
     private void Awake()
     {
         currentStats = GetComponent<CharacterStats>();
@@ -50,6 +52,8 @@ public class EnemyHealthBar : MonoBehaviour
             visibleTimeLeft -= Time.deltaTime;
         }
     }
+
+    #endregion
 
     private void UpdateHealthBar(int currentHealth, int maxHealth)
     {

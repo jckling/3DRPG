@@ -23,6 +23,7 @@ public class ItemUI : MonoBehaviour
         {
             icon.sprite = itemData.itemIcon;
             amount.text = itemAmount.ToString();
+            amount.enabled = itemData.stackable;
             icon.gameObject.SetActive(true);
         }
         else

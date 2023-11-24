@@ -10,10 +10,13 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
     private AttackData_SO baseAttackData;
+    private RuntimeAnimatorController baseAnimator;
 
     [HideInInspector] public bool isCritical;
 
     [Header("Weapon")] public Transform weaponSlot;
+
+    #region Event Functions
 
     private void Awake()
     {
@@ -23,7 +26,10 @@ public class CharacterStats : MonoBehaviour
         }
 
         baseAttackData = Instantiate(attackData);
+        baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
     }
+
+    #endregion
 
     #region Read from CharacterData_SO
 
@@ -160,6 +166,7 @@ public class CharacterStats : MonoBehaviour
         {
             Instantiate(weapon.weaponPrefab, weaponSlot);
             attackData.ApplyWeaponData(weapon.weaponData);
+            GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
         }
     }
 
@@ -174,6 +181,7 @@ public class CharacterStats : MonoBehaviour
         }
 
         attackData.ApplyWeaponData(baseAttackData);
+        GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
     }
 
     #endregion

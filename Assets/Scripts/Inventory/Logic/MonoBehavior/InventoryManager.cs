@@ -9,7 +9,11 @@ public class InventoryManager : Singleton<InventoryManager>
         public RectTransform originalParent;
     }
 
-    [Header("Inventory Data")] public InventoryData_SO templateData;
+    [Header("Inventory Data")] public InventoryData_SO inventoryTemplate;
+    public InventoryData_SO actionTemplate;
+    public InventoryData_SO equipmentTemplate;
+
+    // TODO: HideInInspector
     public InventoryData_SO inventoryData;
     public InventoryData_SO actionData;
     public InventoryData_SO equipmentData;
@@ -30,14 +34,30 @@ public class InventoryManager : Singleton<InventoryManager>
     [Header("Stats")] public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
 
+    [Header("Tooltip")] public ItemTooltip tooltip;
+
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(this);
+        if (inventoryTemplate != null)
+        {
+            inventoryData = Instantiate(inventoryTemplate);
+        }
+
+        if (actionTemplate != null)
+        {
+            actionData = Instantiate(actionTemplate);
+        }
+
+        if (equipmentTemplate != null)
+        {
+            equipmentData = Instantiate(equipmentTemplate);
+        }
     }
 
     private void Start()
     {
+        LoadData();
         inventoryUI.RefreshUI();
         actionUI.RefreshUI();
         equipmentUI.RefreshUI();
@@ -56,9 +76,23 @@ public class InventoryManager : Singleton<InventoryManager>
             statsPanel.SetActive(isStatsOpen);
         }
 
-        // TODO: 切换武器时更新，进入游戏时设置
+        // TODO: 切换武器时更新，进入游戏时设置，就不用在 Update 中一直更新
         var playerStats = GameManager.Instance.playerStats;
         UpdateStatsText(playerStats.MaxHealth, playerStats.MinDamage, playerStats.MaxDamage);
+    }
+
+    public void SaveData()
+    {
+        SaveManager.Instance.Save(inventoryData, inventoryData.name);
+        SaveManager.Instance.Save(actionData, actionData.name);
+        SaveManager.Instance.Save(equipmentData, equipmentData.name);
+    }
+
+    public void LoadData()
+    {
+        SaveManager.Instance.Load(inventoryData, inventoryData.name);
+        SaveManager.Instance.Load(actionData, actionData.name);
+        SaveManager.Instance.Load(equipmentData, equipmentData.name);
     }
 
     public void UpdateStatsText(int health, int min, int max)
