@@ -6,7 +6,7 @@ public class ItemUI : MonoBehaviour
 {
     public Image icon = null;
     public TextMeshProUGUI amount = null;
-
+    public ItemData_SO currentItemData;
     public InventoryData_SO Bag { get; set; }
     public int Index { get; set; } = -1;
 
@@ -21,6 +21,7 @@ public class ItemUI : MonoBehaviour
 
         if (itemData != null)
         {
+            currentItemData = itemData;
             icon.sprite = itemData.itemIcon;
             amount.text = itemAmount.ToString();
             amount.enabled = itemData.stackable;

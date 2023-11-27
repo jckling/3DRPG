@@ -10,20 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9df0643c40190c543a8b0eb5dfa0e647, type: 3}
-  m_Name: New Dialogue Data
+  m_Name: NPC_Hero Dialogue Data
   m_EditorClassIdentifier: 
   dialoguePieces:
   - ID: 01
     image: {fileID: 21300000, guid: f8fceb41b68ef0a4ea35add24f4635e0, type: 3}
-    text: Hello
+    text: Hello, nice to meet you!
+    quest: {fileID: 0}
     options:
-    - text: Hello
+    - text: ......
       targetID: 
       takeQuest: 0
-    - text: Hi
+    - text: Hello
       targetID: 02
       takeQuest: 0
   - ID: 02
     image: {fileID: 21300000, guid: f8fceb41b68ef0a4ea35add24f4635e0, type: 3}
-    text: Nice to meet you
-    options: []
+    text: Currently there are some monsters make people trouble, can you help me
+      to clear them?
+    quest: {fileID: 11400000, guid: ec0109c0c501aea4c8b40c1e80d0775a, type: 2}
+    options:
+    - text: OK, I'd like to help
+      targetID: 
+      takeQuest: 1
+    - text: Sorry. I'm busy...
+      targetID: 
+      takeQuest: 0

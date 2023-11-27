@@ -8,7 +8,7 @@ public class OptionUI : MonoBehaviour
     private Button thisButton;
     private DialoguePiece currentPiece;
     private string nextPieceID;
-
+    private bool takeQuest;
 
     private void Awake()
     {
@@ -21,10 +21,31 @@ public class OptionUI : MonoBehaviour
         currentPiece = piece;
         text.text = option.text;
         nextPieceID = option.targetID;
+        takeQuest = option.takeQuest;
     }
 
     private void OnOptionClicked()
     {
+        if (currentPiece.quest != null)
+        {
+            var newTask = new QuestManager.QuestTask
+            {
+                questData = Instantiate(currentPiece.quest)
+            };
+
+            if (takeQuest)
+            {
+                if (QuestManager.Instance.HaveQuest(newTask.questData))
+                {
+                }
+                else
+                {
+                    QuestManager.Instance.tasks.Add(newTask);
+                    QuestManager.Instance.GetTask(newTask.questData).IsStarted = true;
+                }
+            }
+        }
+
         if (nextPieceID == "")
         {
             DialogueUI.Instance.dialoguePanel.SetActive(false);
