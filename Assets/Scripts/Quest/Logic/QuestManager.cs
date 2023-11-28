@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
 {
@@ -30,6 +31,21 @@ public class QuestManager : Singleton<QuestManager>
 
     public List<QuestTask> tasks = new List<QuestTask>();
 
+    #region Event Functions
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        LoadQuestData();
+    }
+
+    #endregion
+
     public bool HaveQuest(QuestData_SO data)
     {
         return data != null && tasks.Any(task => task.questData.questName == data.questName);
@@ -44,6 +60,11 @@ public class QuestManager : Singleton<QuestManager>
     {
         foreach (var task in tasks)
         {
+            if (task.IsFinished)
+            {
+                continue;
+            }
+
             var matchTask = task.questData.questRequires.Find(r => r.name == requireName);
             if (matchTask != null)
             {
@@ -51,6 +72,26 @@ public class QuestManager : Singleton<QuestManager>
             }
 
             task.questData.CheckQuestProgress();
+        }
+    }
+
+    public void SaveQuestData()
+    {
+        PlayerPrefs.SetInt("QuestCount", tasks.Count);
+        for (var i = 0; i < tasks.Count; i++)
+        {
+            SaveManager.Instance.Save(tasks[i].questData, "task" + i);
+        }
+    }
+
+    public void LoadQuestData()
+    {
+        var questCount = PlayerPrefs.GetInt("QuestCount");
+        for (var i = 0; i < questCount; i++)
+        {
+            var newQuest = ScriptableObject.CreateInstance<QuestData_SO>();
+            SaveManager.Instance.Load(newQuest, "task" + i);
+            tasks.Add(new QuestTask() { questData = newQuest });
         }
     }
 }

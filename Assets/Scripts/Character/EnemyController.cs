@@ -303,7 +303,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         Gizmos.DrawWireSphere(transform.position, sightRadius);
     }
 
-    #region Animation Event
+    #region Animation Events
 
     void Hit()
     {

@@ -7,10 +7,14 @@ public class QuestButton : MonoBehaviour
     public TextMeshProUGUI questName;
     public QuestData_SO currentData;
 
+    #region Event Functions
+
     private void Awake()
     {
         GetComponent<Button>().onClick.AddListener(UpdateQuestContent);
     }
+
+    #endregion
 
     private void UpdateQuestContent()
     {

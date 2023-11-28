@@ -9,11 +9,17 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private SlotHolder targetHolder;
     public bool isDragging = false;
 
+    #region Event Functions
+
     private void Awake()
     {
         currentItemUI = GetComponent<ItemUI>();
         currentHolder = GetComponentInParent<SlotHolder>();
     }
+
+    #endregion
+
+    #region Impelement Interfaces
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -99,6 +105,8 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         isDragging = false;
     }
+
+    #endregion
 
     private void SwapItem()
     {

@@ -9,36 +9,44 @@ public class InventoryManager : Singleton<InventoryManager>
         public RectTransform originalParent;
     }
 
+    // Template Data
     [Header("Inventory Data")] public InventoryData_SO inventoryTemplate;
     public InventoryData_SO actionTemplate;
     public InventoryData_SO equipmentTemplate;
 
-    // TODO: HideInInspector
-    public InventoryData_SO inventoryData;
-    public InventoryData_SO actionData;
-    public InventoryData_SO equipmentData;
+    // Inventory Data
+    [HideInInspector] public InventoryData_SO inventoryData;
+    [HideInInspector] public InventoryData_SO actionData;
+    [HideInInspector] public InventoryData_SO equipmentData;
 
+    // Containers
     [Header("Container")] public ContainerUI inventoryUI;
     public ContainerUI actionUI;
     public ContainerUI equipmentUI;
 
+    // Drag
     [Header("Drag Canvas")] public Canvas dragCanvas;
     public DragData currentDrag;
 
-    // panel
+    // Panel
     public GameObject bagPanel;
     public GameObject statsPanel;
     private bool isBagOpen = false;
     private bool isStatsOpen = false;
 
+    // Player Stats Text
     [Header("Stats")] public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
 
+    // Tooltip
     [Header("Tooltip")] public ItemTooltip tooltip;
+
+    #region Event Functions
 
     protected override void Awake()
     {
         base.Awake();
+
         if (inventoryTemplate != null)
         {
             inventoryData = Instantiate(inventoryTemplate);
@@ -58,14 +66,12 @@ public class InventoryManager : Singleton<InventoryManager>
     private void Start()
     {
         LoadData();
-        inventoryUI.RefreshUI();
-        actionUI.RefreshUI();
-        equipmentUI.RefreshUI();
+        RefreshUI();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             isBagOpen = !isBagOpen;
             bagPanel.SetActive(isBagOpen);
@@ -75,8 +81,16 @@ public class InventoryManager : Singleton<InventoryManager>
             isStatsOpen = !isStatsOpen;
             statsPanel.SetActive(isStatsOpen);
         }
+    }
 
-        // TODO: 切换武器时更新，进入游戏时设置，就不用在 Update 中一直更新
+    #endregion
+
+    public void RefreshUI()
+    {
+        inventoryUI.RefreshUI();
+        actionUI.RefreshUI();
+        equipmentUI.RefreshUI();
+
         var playerStats = GameManager.Instance.playerStats;
         UpdateStatsText(playerStats.MaxHealth, playerStats.MinDamage, playerStats.MaxDamage);
     }
@@ -143,6 +157,45 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         return false;
+    }
+
+    #endregion
+
+    #region Quest
+
+    public void CheckQuestItem(string questItemName)
+    {
+        foreach (var item in inventoryData.items)
+        {
+            if (item.itemData != null)
+            {
+                if (item.itemData.itemName == questItemName)
+                {
+                    QuestManager.Instance.UpdateQuestProgress(item.itemData.itemName, item.amount);
+                }
+            }
+        }
+
+        foreach (var item in actionData.items)
+        {
+            if (item.itemData != null)
+            {
+                if (item.itemData.itemName == questItemName)
+                {
+                    QuestManager.Instance.UpdateQuestProgress(item.itemData.itemName, item.itemData.itemAmount);
+                }
+            }
+        }
+    }
+
+    public InventoryItem QuestItemInBag(ItemData_SO questItem)
+    {
+        return inventoryData.items.Find(i => i.itemData == questItem);
+    }
+
+    public InventoryItem QuestItemInAction(ItemData_SO questItem)
+    {
+        return actionData.items.Find(i => i.itemData == questItem);
     }
 
     #endregion

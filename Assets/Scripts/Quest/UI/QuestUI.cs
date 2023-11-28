@@ -17,6 +17,8 @@ public class QuestUI : Singleton<QuestUI>
     [Header("Reward")] public RectTransform rewardList;
     public ItemUI reward;
 
+    #region Event Functions
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
@@ -33,6 +35,8 @@ public class QuestUI : Singleton<QuestUI>
             }
         }
     }
+
+    #endregion
 
     private void SetUpQuestList()
     {
@@ -72,7 +76,14 @@ public class QuestUI : Singleton<QuestUI>
         foreach (var require in questData.questRequires)
         {
             var newRequire = Instantiate(requirement, requireList);
-            newRequire.SetUpRequirement(require.name, require.requireAmount, require.currentAmount);
+            if (questData.isFinished)
+            {
+                newRequire.SetUpRequirement(require.name, require.requireAmount);
+            }
+            else
+            {
+                newRequire.SetUpRequirement(require.name, require.requireAmount, require.currentAmount);
+            }
         }
     }
 

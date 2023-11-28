@@ -4,6 +4,8 @@ public class ItemPickup : MonoBehaviour
 {
     public ItemData_SO itemData;
 
+    #region Event Functions
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -14,4 +16,6 @@ public class ItemPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    #endregion
 }

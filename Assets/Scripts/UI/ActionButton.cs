@@ -5,6 +5,8 @@ public class ActionButton : MonoBehaviour
     public KeyCode actionKey;
     private SlotHolder currentSlotHolder;
 
+    #region Event Functions
+
     private void Awake()
     {
         currentSlotHolder = GetComponent<SlotHolder>();
@@ -17,4 +19,6 @@ public class ActionButton : MonoBehaviour
             currentSlotHolder.UseItem();
         }
     }
+
+    #endregion
 }

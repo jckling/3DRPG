@@ -14,37 +14,16 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public SlotType slotType;
     public ItemUI itemUI;
 
-    public void UpdateItem()
+    #region Event Functions
+
+    private void OnDisable()
     {
-        switch (slotType)
-        {
-            case SlotType.Bag:
-                itemUI.Bag = InventoryManager.Instance.inventoryData;
-                break;
-            case SlotType.Weapon:
-                itemUI.Bag = InventoryManager.Instance.equipmentData;
-                if (itemUI.Bag.items[itemUI.Index].itemData != null)
-                {
-                    GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].itemData);
-                }
-                else
-                {
-                    // TODO: 武器耐久度
-                    GameManager.Instance.playerStats.UnEquipWeapon();
-                }
-
-                break;
-            case SlotType.Armor:
-                itemUI.Bag = InventoryManager.Instance.equipmentData;
-                break;
-            case SlotType.Action:
-                itemUI.Bag = InventoryManager.Instance.actionData;
-                break;
-        }
-
-        var item = itemUI.Bag.items[itemUI.Index];
-        itemUI.SetUpItemUI(item.itemData, item.amount);
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
     }
+
+    #endregion
+
+    #region Implement Interfaces
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -52,20 +31,6 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         {
             UseItem();
         }
-    }
-
-    public void UseItem()
-    {
-        if (itemUI.GetItem() &&
-            itemUI.GetItem().itemType == ItemType.Usable &&
-            itemUI.Bag.items[itemUI.Index].amount > 0)
-        {
-            GameManager.Instance.playerStats.ApplyHealth(itemUI.GetItem().usableItemData.healthPoint);
-            itemUI.Bag.items[itemUI.Index].amount--;
-            QuestManager.Instance.UpdateQuestProgress(itemUI.GetItem().itemName, -1);
-        }
-
-        UpdateItem();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -83,8 +48,50 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         InventoryManager.Instance.tooltip.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
+    #endregion
+
+    public void UpdateItem()
     {
-        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
+        switch (slotType)
+        {
+            case SlotType.Bag:
+                itemUI.Bag = InventoryManager.Instance.inventoryData;
+                break;
+            case SlotType.Weapon:
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
+                if (itemUI.Bag.items[itemUI.Index].itemData != null)
+                {
+                    GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].itemData);
+                }
+                else
+                {
+                    GameManager.Instance.playerStats.UnEquipWeapon();
+                }
+
+                break;
+            case SlotType.Armor:
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
+                break;
+            case SlotType.Action:
+                itemUI.Bag = InventoryManager.Instance.actionData;
+                break;
+        }
+
+        var item = itemUI.Bag.items[itemUI.Index];
+        itemUI.SetUpItemUI(item.itemData, item.amount);
+    }
+
+    public void UseItem()
+    {
+        if (itemUI.GetItem() &&
+            itemUI.GetItem().itemType == ItemType.Usable &&
+            itemUI.Bag.items[itemUI.Index].amount > 0)
+        {
+            GameManager.Instance.playerStats.ApplyHealth(itemUI.GetItem().usableItemData.healthPoint);
+            itemUI.Bag.items[itemUI.Index].amount--;
+            QuestManager.Instance.UpdateQuestProgress(itemUI.GetItem().itemName, -1);
+        }
+
+        UpdateItem();
     }
 }

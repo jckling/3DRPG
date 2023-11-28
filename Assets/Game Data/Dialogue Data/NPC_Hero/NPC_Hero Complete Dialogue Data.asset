@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df0643c40190c543a8b0eb5dfa0e647, type: 3}
+  m_Name: NPC_Hero Complete Dialogue Data
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: 01
+    image: {fileID: 21300000, guid: f8fceb41b68ef0a4ea35add24f4635e0, type: 3}
+    text: You've got enough apples, this is the reword for your helping.
+    quest: {fileID: 11400000, guid: e3aa6bb5cb5fd9641bf9020468f3eaba, type: 2}
+    options:
+    - text: Thank you
+      targetID: 
+      takeQuest: 1

@@ -7,6 +7,8 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     public static T Instance => instance;
     public static bool isInitialized => instance != null;
 
+    #region Event Functions
+
     protected virtual void Awake()
     {
         if (instance != null)
@@ -26,4 +28,6 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             instance = null;
         }
     }
+
+    #endregion
 }

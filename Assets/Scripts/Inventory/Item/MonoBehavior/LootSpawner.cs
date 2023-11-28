@@ -16,7 +16,7 @@ public class LootSpawner : MonoBehaviour
     public void SpawnLoot()
     {
         float currentValue = Random.value;
-        for (int i = 0; i < lootItems.Length; i++)
+        for (var i = 0; i < lootItems.Length; i++)
         {
             if (currentValue <= lootItems[i].weight)
             {

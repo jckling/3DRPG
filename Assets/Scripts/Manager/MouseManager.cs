@@ -9,6 +9,8 @@ public class MouseManager : Singleton<MouseManager>
     public Texture2D point, doorway, attack, target, arrow;
     private RaycastHit hitInfo;
 
+    #region Event Functions
+
     protected override void Awake()
     {
         base.Awake();
@@ -17,20 +19,26 @@ public class MouseManager : Singleton<MouseManager>
 
     private void Update()
     {
+        SetCursorTexture();
         if (InteractWithUI())
         {
-            Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
+            return;
         }
-        else
-        {
-            SetCursorTexture();
-            MouseControl();
-        }
+
+        MouseControl();
     }
+
+    #endregion
 
     private void SetCursorTexture()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (InteractWithUI())
+        {
+            Cursor.SetCursor(point, Vector2.zero, CursorMode.Auto);
+            return;
+        }
+
         if (Physics.Raycast(ray, out hitInfo))
         {
             switch (hitInfo.collider.gameObject.tag)

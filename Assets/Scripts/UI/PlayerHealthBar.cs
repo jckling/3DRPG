@@ -8,12 +8,16 @@ public class PlayerHealthBar : MonoBehaviour
     public Image healthSlider;
     public Image expSlider;
 
+    #region Event Functions
+
     private void Update()
     {
         levelText.text = "Level " + GameManager.Instance.playerStats.CurrentLevel.ToString("00");
         UpdateHealth();
         UpdateExp();
     }
+
+    #endregion
 
     private void UpdateHealth()
     {

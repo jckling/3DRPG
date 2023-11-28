@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
     private Button exitGameButton;
     private PlayableDirector director;
 
+    #region Event Functions
+
     private void Awake()
     {
         newGameButton = transform.GetChild(1).GetComponent<Button>();
@@ -22,6 +24,8 @@ public class MainMenu : MonoBehaviour
         director = FindObjectOfType<PlayableDirector>();
         director.stopped += NewGame;
     }
+
+    #endregion
 
     private void PlayTimeline()
     {

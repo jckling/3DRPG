@@ -7,6 +7,8 @@ public class SaveManager : Singleton<SaveManager>
     private string sceneName = "level";
     public string SceneName => PlayerPrefs.GetString(sceneName);
 
+    #region Event Functions
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,6 +32,8 @@ public class SaveManager : Singleton<SaveManager>
             LoadPlayerData();
         }
     }
+
+    #endregion
 
     public void SavePlayerData()
     {

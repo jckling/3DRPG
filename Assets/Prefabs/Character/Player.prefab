@@ -1555,7 +1555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateCharacterData: {fileID: 11400000, guid: 0e01e24d18322d44fae04e719a34c5d9, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: aff43d4c70f36684cb561a2763148556, type: 2}
+  templateAttackData: {fileID: 11400000, guid: aff43d4c70f36684cb561a2763148556, type: 2}
+  attackData: {fileID: 0}
   isCritical: 0
   weaponSlot: {fileID: 1317896309121931283}
 --- !u!114 &1073278262793928410

@@ -19,6 +19,11 @@ public class ItemUI : MonoBehaviour
             return;
         }
 
+        if (itemAmount < 0)
+        {
+            itemData = null;
+        }
+
         if (itemData != null)
         {
             currentItemData = itemData;

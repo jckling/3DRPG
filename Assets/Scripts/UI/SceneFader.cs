@@ -7,11 +7,15 @@ public class SceneFader : MonoBehaviour
     public float fadeInDuration;
     public float fadeOutDuration;
 
+    #region Event Functions
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         DontDestroyOnLoad(this);
     }
+
+    #endregion
 
     public IEnumerator FadeOutFadeIn()
     {

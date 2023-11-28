@@ -11,6 +11,8 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     private NavMeshAgent playerAgent;
     private bool fadeFinished;
 
+    #region Event Functions
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,6 +24,8 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
         GameManager.Instance.AddObserver(this);
         fadeFinished = true;
     }
+
+    #endregion
 
     public void TransitionToDestination(TransitionPoint transitionPoint)
     {
@@ -38,14 +42,14 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
 
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
-        SaveManager.Instance.SavePlayerData();
-        InventoryManager.Instance.SaveData();
+        SaveGameData();
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
             yield return SceneManager.LoadSceneAsync(sceneName);
-            yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position,
+            yield return player = Instantiate(playerPrefab, GetDestination(destinationTag).transform.position,
                 GetDestination(destinationTag).transform.rotation);
+
             SaveManager.Instance.LoadPlayerData();
         }
         else
@@ -75,6 +79,8 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
         return null;
     }
 
+    #region Main Menu
+
     public void TransitionToMain()
     {
         StartCoroutine(LoadMain());
@@ -100,18 +106,27 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position,
                 GameManager.Instance.GetEntrance().rotation);
 
-            SaveManager.Instance.SavePlayerData();
-            InventoryManager.Instance.SaveData();
+            SaveGameData();
             yield return StartCoroutine(fadeCanvas.FadeIn(2f));
         }
     }
 
     IEnumerator LoadMain()
     {
+        SaveGameData();
         SceneFader fadeCanvas = Instantiate(fadeCanvasPrefab);
         yield return StartCoroutine(fadeCanvas.FadeOut(3f));
         yield return SceneManager.LoadSceneAsync("Main");
         yield return StartCoroutine(fadeCanvas.FadeIn(2f));
+    }
+
+    #endregion
+
+    private void SaveGameData()
+    {
+        SaveManager.Instance.SavePlayerData();
+        InventoryManager.Instance.SaveData();
+        QuestManager.Instance.SaveQuestData();
     }
 
     public void EndNotify()

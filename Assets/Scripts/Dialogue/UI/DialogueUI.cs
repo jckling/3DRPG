@@ -15,11 +15,15 @@ public class DialogueUI : Singleton<DialogueUI>
     [Header("Dialogue Data")] public DialogueData_SO currentData;
     private int currentIndex = 0;
 
+    #region Event Functions
+
     protected override void Awake()
     {
         base.Awake();
         nextButton.onClick.AddListener(ContinueDialogue);
     }
+
+    #endregion
 
     private void ContinueDialogue()
     {

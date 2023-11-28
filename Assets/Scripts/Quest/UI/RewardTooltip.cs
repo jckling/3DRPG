@@ -5,10 +5,16 @@ public class RewardTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     private ItemUI currentItemUI;
 
+    #region Event Functions
+
     private void Awake()
     {
         currentItemUI = GetComponent<ItemUI>();
     }
+
+    #endregion
+
+    #region Implement Interfaces
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -20,4 +26,6 @@ public class RewardTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         QuestUI.Instance.tooltip.gameObject.SetActive(false);
     }
+
+    #endregion
 }

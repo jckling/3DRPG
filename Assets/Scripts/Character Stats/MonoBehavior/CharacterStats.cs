@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
@@ -8,6 +9,7 @@ public class CharacterStats : MonoBehaviour
 
     public CharacterData_SO templateCharacterData;
     public CharacterData_SO characterData;
+    public AttackData_SO templateAttackData;
     public AttackData_SO attackData;
     private AttackData_SO baseAttackData;
     private RuntimeAnimatorController baseAnimator;
@@ -25,8 +27,12 @@ public class CharacterStats : MonoBehaviour
             characterData = Instantiate(templateCharacterData);
         }
 
-        baseAttackData = Instantiate(attackData);
-        baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
+        if (templateAttackData != null)
+        {
+            attackData = Instantiate(templateAttackData);
+            baseAttackData = Instantiate(templateAttackData);
+            baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
+        }
     }
 
     #endregion
@@ -157,7 +163,7 @@ public class CharacterStats : MonoBehaviour
     {
         UnEquipWeapon();
         EquipWeapon(weapon);
-        // InventoryManager.Instance.UpdateStatsText(MaxHealth, MinDamage, MaxDamage);
+        InventoryManager.Instance.UpdateStatsText(MaxHealth, MinDamage, MaxDamage);
     }
 
     public void EquipWeapon(ItemData_SO weapon)

@@ -5,11 +5,22 @@ public class DialogueController : MonoBehaviour
     public DialogueData_SO currentData;
     private bool canTalk = false;
 
+    #region Event Functions
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && currentData != null)
         {
             canTalk = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            DialogueUI.Instance.dialoguePanel.SetActive(false);
+            canTalk = false;
         }
     }
 
@@ -21,6 +32,8 @@ public class DialogueController : MonoBehaviour
             OpenDialogue();
         }
     }
+
+    #endregion
 
     private void OpenDialogue()
     {

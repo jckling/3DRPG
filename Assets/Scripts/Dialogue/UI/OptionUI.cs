@@ -10,11 +10,15 @@ public class OptionUI : MonoBehaviour
     private string nextPieceID;
     private bool takeQuest;
 
+    #region Event Functions
+
     private void Awake()
     {
         thisButton = GetComponent<Button>();
         thisButton.onClick.AddListener(OnOptionClicked);
     }
+
+    #endregion
 
     public void UpdateOption(DialoguePiece piece, DialogueOption option)
     {
@@ -37,16 +41,25 @@ public class OptionUI : MonoBehaviour
             {
                 if (QuestManager.Instance.HaveQuest(newTask.questData))
                 {
+                    if (QuestManager.Instance.GetTask(newTask.questData).IsCompleted)
+                    {
+                        newTask.questData.GiveRewards();
+                        QuestManager.Instance.GetTask(newTask.questData).IsFinished = true;
+                    }
                 }
                 else
                 {
                     QuestManager.Instance.tasks.Add(newTask);
                     QuestManager.Instance.GetTask(newTask.questData).IsStarted = true;
+                    foreach (var requireItem in newTask.questData.RequireTargetName())
+                    {
+                        InventoryManager.Instance.CheckQuestItem(requireItem);
+                    }
                 }
             }
         }
 
-        if (nextPieceID == "")
+        if (nextPieceID == string.Empty)
         {
             DialogueUI.Instance.dialoguePanel.SetActive(false);
         }

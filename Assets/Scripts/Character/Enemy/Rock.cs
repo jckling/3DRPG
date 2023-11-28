@@ -20,6 +20,8 @@ public class Rock : MonoBehaviour
 
     public GameObject breakEffect;
 
+    #region Event Functions
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,17 +36,6 @@ public class Rock : MonoBehaviour
         {
             rockStates = RockStates.HitNothing;
         }
-    }
-
-    private void FlyToTarget()
-    {
-        if (target == null)
-        {
-            target = FindObjectOfType<PlayerController>().gameObject;
-        }
-
-        direction = (target.transform.position - transform.position + Vector3.up).normalized;
-        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -78,5 +69,18 @@ public class Rock : MonoBehaviour
             case RockStates.HitNothing:
                 break;
         }
+    }
+
+    #endregion
+
+    private void FlyToTarget()
+    {
+        if (target == null)
+        {
+            target = FindObjectOfType<PlayerController>().gameObject;
+        }
+
+        direction = (target.transform.position - transform.position + Vector3.up).normalized;
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 }

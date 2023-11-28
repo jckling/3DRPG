@@ -14,6 +14,8 @@ public class TransitionPoint : MonoBehaviour
 
     private bool canTrans;
 
+    #region Event Functions
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && canTrans)
@@ -37,4 +39,6 @@ public class TransitionPoint : MonoBehaviour
             canTrans = false;
         }
     }
+
+    #endregion
 }

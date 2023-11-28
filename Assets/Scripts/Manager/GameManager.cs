@@ -8,11 +8,15 @@ public class GameManager : Singleton<GameManager>
     private List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
     private CinemachineFreeLook freeLookCamera;
 
+    #region Event Functions
+
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
     }
+
+    #endregion
 
     public void RegisterPlayer(CharacterStats player)
     {
