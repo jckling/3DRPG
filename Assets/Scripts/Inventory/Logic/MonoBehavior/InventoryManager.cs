@@ -76,7 +76,8 @@ public class InventoryManager : Singleton<InventoryManager>
             isBagOpen = !isBagOpen;
             bagPanel.SetActive(isBagOpen);
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
             isStatsOpen = !isStatsOpen;
             statsPanel.SetActive(isStatsOpen);

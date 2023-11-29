@@ -63,6 +63,10 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
                 {
                     GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].itemData);
                 }
+                else
+                {
+                    GameManager.Instance.playerStats.UnEquipWeapon();
+                }
 
                 break;
             case SlotType.Armor:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Equipment
   m_EditorClassIdentifier: 
   items:
-  - itemData: {fileID: 11400000, guid: b556e10ab5bc2a641b4ecf24ad9d2438, type: 2}
-    amount: 1
+  - itemData: {fileID: 0}
+    amount: 0
   - itemData: {fileID: 0}
     amount: 0
