@@ -24,6 +24,7 @@ MonoBehaviour:
     - text: Hello
       targetID: 02
       takeQuest: 0
+    IsExpand: 0
   - ID: 02
     image: {fileID: 21300000, guid: f8fceb41b68ef0a4ea35add24f4635e0, type: 3}
     text: Currently there are some monsters make people trouble, we're short in food.
@@ -36,3 +37,4 @@ MonoBehaviour:
     - text: Sorry. I'm busy...
       targetID: 
       takeQuest: 0
+    IsExpand: 0

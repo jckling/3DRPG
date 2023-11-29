@@ -21,3 +21,4 @@ MonoBehaviour:
     - text: Thank you
       targetID: 
       takeQuest: 1
+    IsExpand: 0

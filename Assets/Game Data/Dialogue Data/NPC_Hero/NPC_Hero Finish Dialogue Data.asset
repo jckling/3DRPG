@@ -18,3 +18,4 @@ MonoBehaviour:
     text: Thanks for your helping!
     quest: {fileID: 0}
     options: []
+    IsExpand: 0

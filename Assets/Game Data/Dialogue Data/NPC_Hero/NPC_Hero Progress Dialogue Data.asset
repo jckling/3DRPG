@@ -18,8 +18,10 @@ MonoBehaviour:
     text: These apples are not enough...
     quest: {fileID: 0}
     options: []
+    IsExpand: 0
   - ID: 02
     image: {fileID: 21300000, guid: f8fceb41b68ef0a4ea35add24f4635e0, type: 3}
     text: You can collect apples  from the ground or by killing slime.
     quest: {fileID: 0}
     options: []
+    IsExpand: 0
