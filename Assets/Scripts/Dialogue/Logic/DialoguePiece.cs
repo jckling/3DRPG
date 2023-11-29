@@ -10,4 +10,5 @@ public class DialoguePiece
     [TextArea] public string text;
     public QuestData_SO quest;
     public List<DialogueOption> options = new List<DialogueOption>();
+    [HideInInspector] public bool IsExpand;
 }
